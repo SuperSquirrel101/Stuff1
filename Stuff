@@ -29,9 +29,9 @@ html
     <input type="file" id="fileInput" accept=".n64" />
     <div id="emulator"></div>
 
-    <script src="mupen64plus.js"></script>
+    <script src="project64.js"></script>
     <script>
-        var emulator = new Mupen64Plus("#emulator");
+        var emulator = new Project64("#emulator");
 
         document.getElementById("fileInput").addEventListener("change", function(event) {
             var file = event.target.files[0];
