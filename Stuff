@@ -1,0 +1,49 @@
+html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>N64 Emulator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+        }
+        
+        #emulator {
+            width: 800px;
+            height: 600px;
+        }
+        
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="fileInput" accept=".n64" />
+    <div id="emulator"></div>
+
+    <script src="mupen64plus.js"></script>
+    <script>
+        var emulator = new Mupen64Plus("#emulator");
+
+        document.getElementById("fileInput").addEventListener("change", function(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var romData = new Uint8Array(e.target.result);
+                emulator.loadROM(romData);
+            };
+
+            reader.readAsArrayBuffer(file);
+        });
+    </script>
+</body>
+</html>
